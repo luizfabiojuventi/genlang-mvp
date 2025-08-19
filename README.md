@@ -3,6 +3,10 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/<seu-usuario>/<seu-repo>/ci.yml?branch=main)](https://github.com/<seu-usuario>/<seu-repo>/actions)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 
+![GitHub Repo stars](https://img.shields.io/github/stars/luizfabiojuventi/genlang-mvp?style=social)
+
+[![PyPI](https://img.shields.io/pypi/v/genlang-mvp.svg)](https://pypi.org/project/genlang-mvp/)
+
 **GenLang** é uma DSL minimalista para **treino** e **geração** com modelos da Hugging Face, focada em simplicidade e produtividade.  
 Modelo de negócio: **open-core** — recursos básicos abertos, recursos premium (ex.: fine-tuning avançado) opcionais.
 
@@ -49,3 +53,16 @@ genlang examples/hello_fast_pt.gs
 # Rodar um demo com LoRA (se existir lora_demo.gs e 'peft' instalado)
 
 genlang examples/lora_demo.gs
+
+## 🧪 CI (GitHub Actions)
+
+## 💎 Roadmap (open-core)
+
+FILTER e MAP no dataset
+Métricas extras (ROUGE/BLEU)
+genlang server (REST) para integração low-code/no-code
+Pacote opcional “premium” via extras (pip install .[premium])
+
+## 🙌 Agradecimentos
+
+Hugging Face transformers, datasets, accelerate e comunidade PEFT/LoRA.
