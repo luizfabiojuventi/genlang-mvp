@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      HF_HOME: ${{ github.workspace }}/.cache/huggingface
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Cache Hugging Face
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.HF_HOME }}
+          key: ${{ runner.os }}-hf-${{ hashFiles('examples/**', 'genlang/**') }}
+          restore-keys: |
+            ${{ runner.os }}-hf-
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip wheel setuptools
+
+      - name: Install project (editable)
+        run: |
+          pip install -e .
+
+      - name: (Optional) Install torch CPU (Linux)
+        run: |
+          pip install --upgrade "torch==2.6.0"
+
+      - name: Lint (basic)
+        run: |
+          python -m pyflakes genlang || true
+
+      - name: Smoke test CLI with example
+        run: |
+          genlang examples/hello_fast_pt.gs

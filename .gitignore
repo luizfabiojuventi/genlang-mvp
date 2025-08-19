@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Saída de modelos
+out/
+
+# Cache do Hugging Face
+~/.cache/

@@ -1,0 +1,43 @@
+start: stmt*
+?stmt: model_stmt
+     | tokenizer_stmt
+     | dataset_stmt
+     | prompt_stmt
+     | train_stmt
+     | save_stmt
+     | generate_stmt
+     | set_stmt
+     | split_stmt
+     | shuffle_stmt
+     | eval_stmt
+     | comment
+
+comment: /#[^\n]*/
+
+model_stmt: "MODEL" STRING
+tokenizer_stmt: "TOKENIZER" ("AUTO" | STRING)
+dataset_stmt: "DATASET" "CSV" STRING "TEXT_COL" IDENT
+prompt_stmt: "PROMPT" STRING
+train_stmt: "TRAIN" (param)*
+save_stmt: "SAVE" STRING
+generate_stmt: "GENERATE" STRING (param)*
+set_stmt: "SET" IDENT "=" value
+
+// Novos comandos
+split_stmt: "SPLIT" "train" "=" SIGNED_NUMBER "%" "," "eval" "=" SIGNED_NUMBER "%"
+shuffle_stmt: "SHUFFLE" ("on" | "off") ("seed" "=" SIGNED_NUMBER)?
+eval_stmt: "EVAL" "perplexity"
+
+param: IDENT "=" value
+
+?value: SIGNED_NUMBER      -> number
+      | STRING             -> string
+      | IDENT              -> ident
+
+%import common.CNAME -> IDENT
+%import common.ESCAPED_STRING -> STRING
+%import common.SIGNED_NUMBER
+%import common.WS
+
+%ignore WS
+%ignore /[\r\n]+/

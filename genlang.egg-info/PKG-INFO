@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: genlang
+Version: 0.1.0
+Summary: DSL simples para treino e geração com LLMs (open-core).
+Author-email: Seu Nome <you@example.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: lark-parser>=0.12.0
+Requires-Dist: transformers>=4.41.0
+Requires-Dist: datasets>=2.19.0
+Requires-Dist: accelerate>=0.33.0
+Requires-Dist: peft>=0.11.0
+
+cat > README.md <<'MD'
+
+# GenLang
+
+DSL minimalista para treino e geração com LLMs (open-core).
+
+## Uso
+
+```bash
+genlang examples/hello_fast_pt.gs
+```

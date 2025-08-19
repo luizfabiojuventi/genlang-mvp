@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+genlang/__init__.py
+genlang/cli.py
+genlang/grammar.lark
+genlang/runtime.py
+genlang.egg-info/PKG-INFO
+genlang.egg-info/SOURCES.txt
+genlang.egg-info/dependency_links.txt
+genlang.egg-info/entry_points.txt
+genlang.egg-info/requires.txt
+genlang.egg-info/top_level.txt

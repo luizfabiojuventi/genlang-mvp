@@ -1,0 +1,30 @@
+[project]
+name = "genlang"
+version = "0.1.0"
+description = "DSL simples para treino e geração com LLMs (open-core)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"   # ← use string SPDX (evita o warning novo)
+authors = [{ name = "Seu Nome", email = "you@example.com" }]
+dependencies = [
+  "lark-parser>=0.12.0",
+  "transformers>=4.41.0",
+  "datasets>=2.19.0",
+  "accelerate>=0.33.0",
+  "peft>=0.11.0"   # se não quiser LoRA agora, pode remover
+]
+
+[project.scripts]
+genlang = "genlang.cli:main"
+
+[tool.setuptools]
+# ↓ Descobrir só o pacote 'genlang' e ignorar exemplos/artefatos
+packages = { find = { include = ["genlang*"], exclude = ["examples*", "tests*", "out*", "build*", "dist*"] } }
+
+[tool.setuptools.package-data]
+# garantir que a gramática vai no wheel/sdist
+genlang = ["grammar.lark"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
